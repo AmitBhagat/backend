@@ -1,0 +1,80 @@
+spring :
+      application :
+             name : api-gateway
+      servlet :
+             multipart :
+                   max-file-size : 128MB
+                   max-request-size : 128MB
+ 
+eureka :
+      instance :
+              preferIpAddress : true
+      server : 
+              wait-time-in-ms-when-sync-empty : 0
+      client :
+              registerWithEureka : true
+              fetchRegistry : true
+              serviceUrl : 
+                       defaultZone : http://localhost:8080/eureka
+ 
+zuul  :
+     routes : 
+         upload :
+                path : /dalrada/upload/**
+                serviceId : upload-service
+                stripPrefix : true
+         reconcile :
+                path : /dalrada/reconcile/**
+                serviceId : reconcile-service
+                stripPrefix : true
+         user :
+                path : /dalrada/user/**
+                serviceId : user-service
+                stripPrefix : true
+         warehouse :
+                 path : /dalrada/warehouse/**
+                 serviceId : warehouse-service
+                 stripPrefix : true
+         mail :
+                 path : /dalrada/mail/**
+                 serviceId : mail-service
+                 stripPrefix : true
+server :
+         port : 8111
+ribbon :
+         ReadTimeout : 120000
+         ConnectTimeout : 120000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
+          
+documentation:
+  swagger:
+    services:
+      -
+        name: Upload Service
+        url: /dalrada/upload/v2/api-docs
+        version: 3.0
+      - 
+        name: Reconcile Service
+        url: /dalrada/reconcile/v2/api-docs
+        version: 2.0
+      -    
+        name: Warehouse Service
+        url: /dalrada/warehouse/v2/api-docs
+        version: 3.0
+      - 
+        name: User Service
+        url: /dalrada/user/v2/api-docs
+        version: 3.0
+      - 
+        name: Mail Service
+        url: /dalrada/mail/v2/api-docs
+        version: 3.0
+        

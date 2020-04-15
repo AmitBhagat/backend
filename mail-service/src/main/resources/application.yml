@@ -1,0 +1,33 @@
+spring :
+         application :
+             name : mail-service
+         mail :
+             host : smtp.gmail.com
+             port : 587
+             username : quickdaan2020@gmail.com
+             password : 8147924898
+             properties :
+                    mail :
+                          smtp : 
+                                 auth : true
+                                 connectiontimeout : 12000
+                                 timeout : 12000
+                                 writetimeout : 12000
+                                 starttls :
+                                          enable : true
+server :
+         port : 8089
+ribbon :
+         ReadTimeout : 120000
+         ConnectTimeout : 120000
+             
+eureka :
+      instance :
+              preferIpAddress : true
+      server : 
+              wait-time-in-ms-when-sync-empty : 0
+      client :
+              registerWithEureka : true
+              fetchRegistry : true
+              serviceUrl : 
+                       defaultZone : http://localhost:8080/eureka
